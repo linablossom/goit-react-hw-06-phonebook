@@ -40,6 +40,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.props.filter);
     const filterBy = this.props.filter.toLowerCase();
     const filteredArray = this.props.filter
       ? this.props.contacts.filter((contact) =>
