@@ -7,15 +7,6 @@ import ContactList from "./components/ContactList";
 import * as actions from "./redux/actions";
 
 class App extends Component {
-  // componentDidMount() {
-  //   try {
-  //     const savedContacts = localStorage.getItem("contacts");
-  //     if (savedContacts) {
-  //       this.setState({ contacts: JSON.parse(savedContacts) });
-  //     }
-  //   } catch (error) {}
-  // }
-
   addContact = (name, number) => {
     const sameContact = this.props.contacts.find(
       (contact) => contact.name === name
@@ -26,13 +17,10 @@ class App extends Component {
     }
 
     this.props.addContact({ id: uuidv4(), name, number });
-
-    // localStorage.setItem("contacts", JSON.stringify(contacts));
   };
 
   deleteContact = (id) => {
     this.props.deleteContact(id);
-    // localStorage.setItem("contacts", JSON.stringify(contacts));
   };
 
   onFilter = (value) => {
