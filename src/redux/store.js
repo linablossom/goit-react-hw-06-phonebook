@@ -20,6 +20,7 @@ import reducer from "./reducers";
 const contactsPersistConfig = {
   key: "contacts",
   storage,
+  blacklist: ["filter"],
 };
 
 const persistedReducer = persistReducer(contactsPersistConfig, reducer);

@@ -1,69 +1,18 @@
-import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { connect } from "react-redux";
+import React from "react";
 import ContactForm from "./components/ContactForm";
 import Filter from "./components/Filter";
 import ContactList from "./components/ContactList";
-import * as actions from "./redux/actions";
 
-class App extends Component {
-  addContact = (name, number) => {
-    const sameContact = this.props.contacts.find(
-      (contact) => contact.name === name
-    );
-    if (sameContact) {
-      alert(`${name} is already in contacts`);
-      return;
-    }
-
-    this.props.addContact({ id: uuidv4(), name, number });
-  };
-
-  deleteContact = (id) => {
-    this.props.deleteContact(id);
-  };
-
-  onFilter = (value) => {
-    this.props.onFilter(value);
-  };
-
-  render() {
-    console.log(this.props.filter);
-    const filterBy = this.props.filter.toLowerCase();
-    const filteredArray = this.props.filter
-      ? this.props.contacts.filter((contact) =>
-          contact.name.toLowerCase().includes(filterBy)
-        )
-      : this.props.contacts;
-
-    return (
-      <>
-        <h2>Phonebook</h2>
-        <ContactForm addContact={this.addContact} />
-        <h2>Contacts</h2>
-        <Filter onFilter={this.onFilter} value={this.props.filter} />
-        <ContactList
-          contacts={filteredArray}
-          deleteContact={this.deleteContact}
-        />
-      </>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    contacts: state.contacts.items,
-    filter: state.contacts.filter,
-  };
+const App = () => {
+  return (
+    <>
+      <h2>Phonebook</h2>
+      <ContactForm />
+      <h2>Contacts</h2>
+      <Filter />
+      <ContactList />
+    </>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addContact: (contact) => dispatch(actions.contactsAdd(contact)),
-    deleteContact: (id) => dispatch(actions.contactsDelete(id)),
-    onFilter: (value) => dispatch(actions.contactsFilter(value)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
